@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="cl.hector.arquetipo_api.mappers.MessageMapper">
+	
+	<resultMap type="cl.hector.arquetipo_api.modelo.ApiMessage" id="ApiMessage">
+		<id property="id" column="message_id"/>
+		<result property="message" column="message"/>
+	</resultMap>
+
+	<sql id="messagesSQL">
+		SELECT message_id, message 
+		FROM ejemplo_archetype.worker_messages
+	</sql>
+	
+	<select id="getMessage" resultMap="ApiMessage" parameterType="java.lang.Integer">
+		<include refid="messagesSQL"/>
+		WHERE message_id = #{idMensaje}
+	</select>
+
+</mapper>
+
